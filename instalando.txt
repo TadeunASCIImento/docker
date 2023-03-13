@@ -1,0 +1,84 @@
+1 Atualiza a lista de pacotes:
+
+1.1 $ sudo apt update
+
+
+
+2 Instala pacotes pré-requisito que deixam o apt usar pacotes pelo HTTPS:
+
+2.1 $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+
+
+3 Adiciona chave GPG repositório oficial do Docker:
+
+3.1 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+
+4 Adiciona o repositório do Docker às fontes do apt:
+
+4.1 $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+
+
+5 Atualiza o banco de dados do pacote com os pacotes do Docker do recém adicionado repositório:
+
+5.1 $ sudo apt update
+
+
+
+6 Certifica que irá instalar do repositório do Docker e não do repositório padrão do Ubuntu:
+
+6.1 $ apt-cache policy docker-ce
+
+6.2 Saída apresentada, a versão para o Docker possa ser diferente:
+
+6.3 Output of apt-cache policy docker-ce
+docker-ce:
+  Instalado: 5:23.0.1-1~ubuntu.20.04~focal
+  Candidato: 5:23.0.1-1~ubuntu.20.04~focal
+  Tabela de versão:
+ *** 5:23.0.1-1~ubuntu.20.04~focal 500
+        500 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages
+
+6.4 O docker-ce ainda não está instalado, mas o candidato para a instalação é do repositório do Docker para o Ubuntu 20.04 (focal).
+
+
+
+7 Instala o Docker:
+
+7.1 sudo apt install docker-ce
+
+
+
+8 O Docker será instalado, o daemon iniciado e o processo habilitado a iniciar no boot. 
+
+8.1 Verifica se o docker está funcionando:
+
+8.2 $ sudo systemctl status docker
+
+8.3 A saída apresentada a seguir, mostra o serviço ativo e funcionando:
+
+Output
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vend>
+     Active: active (running) since Mon 2023-03-13 16:53:25 -03; 2h 21>
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 1615 (dockerd)
+      Tasks: 13
+     Memory: 93.3M
+     CGroup: /system.slice/docker.service
+             └─1615 /usr/bin/dockerd -H fd:// --containerd=/run/contai>
+
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.5712>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.5936>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.6003>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.7170>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.7428>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.7684>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.7686>
+mar 13 16:53:25 inspiron dockerd[1615]: time="2023-03-13T16:53:25.7834>
+mar 13 16:53:25 inspiron systemd[1]: Started Docker Application Contai>
+mar 13
