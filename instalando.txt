@@ -1,7 +1,8 @@
+######################### INSTALANDO O DOCKER NO UBUNTU LINUX 20.04 #########################
+
 1 Atualiza a lista de pacotes:
 
 1.1 $ sudo apt update
-
 
 
 2 Instala pacotes pré-requisito que deixam o apt usar pacotes pelo HTTPS:
@@ -9,11 +10,9 @@
 2.1 $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
 
 
-
 3 Adiciona chave GPG repositório oficial do Docker:
 
 3.1 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
 
 
 4 Adiciona o repositório do Docker às fontes do apt:
@@ -21,11 +20,9 @@
 4.1 $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 
 
-
 5 Atualiza o banco de dados do pacote com os pacotes do Docker do recém adicionado repositório:
 
 5.1 $ sudo apt update
-
 
 
 6 Certifica que irá instalar do repositório do Docker e não do repositório padrão do Ubuntu:
@@ -45,11 +42,9 @@ docker-ce:
 6.4 O docker-ce ainda não está instalado, mas o candidato para a instalação é do repositório do Docker para o Ubuntu 20.04 (focal).
 
 
-
 7 Instala o Docker:
 
 7.1 sudo apt install docker-ce
-
 
 
 8 O Docker será instalado, o daemon iniciado e o processo habilitado a iniciar no boot. 
