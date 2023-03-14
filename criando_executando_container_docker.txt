@@ -1,0 +1,97 @@
+############################## CRIANDO, EXECUTANDO E CONTROLANDO CONTAINERS COM DOCKER ##############################
+
+1 Cria um novo container imagem base Ubuntu na última versão estável:
+	1.1 $ sudo docker run ubuntu /bin/echo <CONTAINER NAME>
+
+2 Exibe os containers:
+
+	2.1 $ sudo docker ps 		-- Em execução    
+	2.2 $ sudo docker ps -a 	-- Inicializados ou pausados
+	2.3 $ sudo docker ps -qa 	-- Sómente o Id do container
+
+3 Cria um container com interatividade e link com o terminal do container:
+
+	3.1 $ sudo docker run -i -t ubuntu /bin/bash
+	3.2 -i Interatividade
+	3.3 -t Link com o terminal
+	3.4 $ sudo docker run -it <CONTAINER NAME> /bin/bash --> inicializa a execução do container criado. 
+	3.5 $ sudo docker exec –it <CONTAINER NAME> /bin/bash -->
+
+4 Verificando o sistema em execução:
+
+	4.1 $ cat /etc/lsb-release
+
+	4.2 Exemplo de saída:
+				DISTRIB_ID=Ubuntu
+				DISTRIB_RELEASE=22.04
+				DISTRIB_CODENAME=jammy
+				DISTRIB_DESCRIPTION="Ubuntu 22.04.2 LTS"  
+
+5 Verificando a faixa de IP utilizada pelo container:
+
+	5.1 $ ifconfig
+
+	5.2 Exemlpo de Saída:
+				eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+						inet 172.17.0.2  netmask 255.255.0.0  broadcast 172.17.255.255
+						ether 02:42:ac:11:00:02  txqueuelen 0  (Ethernet)
+						RX packets 4710  bytes 26697604 (26.6 MB)
+						RX errors 0  dropped 0  overruns 0  frame 0
+						TX packets 4283  bytes 287572 (287.5 KB)
+						TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+				lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+						inet 127.0.0.1  netmask 255.0.0.0
+						loop  txqueuelen 1000  (Local Loopback)
+						RX packets 0  bytes 0 (0.0 B)
+						RX errors 0  dropped 0  overruns 0  frame 0
+						TX packets 0  bytes 0 (0.0 B)
+						TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+6 Informa, em tempo de execução, detalhes sobre o nível de consumo de recursos na máquina host, feito pelos containers:
+
+	6.1 $ sudo docker stats <CONTAINER ID>
+		
+	6.2 Exemplo de Saída:
+				CONTAINER ID   NAME            CPU %     MEM USAGE / LIMIT   MEM %     NET I/O   BLOCK I/O   PIDS
+				942074e8e55c   nervous_fermi   0.00%     0B / 0B             0.00%     0B / 0B   0B / 0B     0
+ 
+7 Lista as imagens criadas:
+
+	7.1 $ sudo docker images
+	
+		7.2 Exemplo de Saída:	
+				REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+				ubuntu       latest    74f2314a03de   13 days ago   77.8MB
+ 
+
+8 Criar um novo container e instala  web server Nginx:
+ 
+	8.1 $ sudo docker run ‐it ‐‐name ex_nginx ubuntu  opção --name define um apelido para o container 
+	8.2 $ apt update
+	8.3 $ apt install -y nginx
+	8.4 $ nginx -v
+
+9 Commita as alterações realizadas no container:
+
+	9.1 $ sudo docker commit <CONTAINER ID> ou <CONTAINER NAME>
+	
+	9.2 Exemplo de Saída: 
+				sha256:6603dadcb8ff245c7774891a6850975355bb242868b26a23bee75dfc5d24829b
+
+
+10 Inicializando o container e rodando o servidor Nginx na porta 8080 do host:
+	
+	10.1 sudo docker run -it -p  8080:80 <CONTAINER NAME> /bin/bash
+	10.1 service nginx start
+	10.2 Abrir o browser e acessar o endereço do localhost http://localhost:8080/
+	
+		========================================================================================================================	
+			Welcome to nginx!
+			If you see this page, the nginx web server is successfully installed and working. Further configuration is required.
+
+			For online documentation and support please refer to nginx.org.
+			Commercial support is available at nginx.com.
+		=========================================================================================================================
+
+			Thank you for using nginx
