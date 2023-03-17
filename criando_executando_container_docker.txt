@@ -99,3 +99,40 @@
                                                                                                                              
 		Thank you for using nginx																							  	
 ====================================================================================================================================
+
+
+11 Criando um container autodestrutivo com a opção --rm:
+
+	11.1 $ sudo docker run ‐it ‐‐rm ‐p 8080:80 ubuntu/nginx /bin/bash -> Exclui o container ao finalizar a execução
+
+
+12 Opção ‐d envia toda a execução para background:
+	
+	12.1 $ sudo docker run ‐d ‐p 8080:80 ubuntu/nginx /usr/sbin/nginx 
+
+
+13 Destruindo imagens com a opção rmi:
+
+	13.1 sudo docker rmi <CONTAINER ID>
+	
+	13.1 sudo docker rmi $(docker images -q) -> todas as imagens 
+
+14 Destruindo container com a opção rm:
+
+	14.1 sudo docker rm $(docker ps -qa) -> Todos os containers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
